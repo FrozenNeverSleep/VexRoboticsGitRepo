@@ -17,8 +17,8 @@ controller Controller = controller();
 
 // usercontrol functions
 void drive() {
-  int rightAxis = Controller.Axis2.position() / 127 * 100;
-  int leftAxis = Controller.Axis4.position() / 127 * 100;
+  int rightAxis = Controller.Axis2.position();
+  int leftAxis = Controller.Axis4.position();
 
   leftMotors.spin(forward, leftAxis + rightAxis, pct);
   rightMotors.spin(forward, leftAxis - rightAxis, pct);
