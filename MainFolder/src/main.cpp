@@ -15,10 +15,23 @@ motor_group rightMotors = motor_group(frontRightMotor, backRightMotor);
 
 controller Controller = controller();
 
+// math fghjljkhsfngdsfjg
+float expoFunction(int x) {
+    if(x == 0) {
+        return 0;
+    }
+    if (x < 0) {
+        return x*x/100.0f*-1;
+    }
+    return x*x/100.0f;
+}
+
+// TODO: move these functions to own files with headers
+
 // usercontrol functions
 void drive() {
   int rightAxis = Controller.Axis2.position();
-  int leftAxis = Controller.Axis4.position();
+  int leftAxis = expoFunction(Controller.Axis4.position());
 
   leftMotors.spin(forward, leftAxis + rightAxis, pct);
   rightMotors.spin(forward, leftAxis - rightAxis, pct);
@@ -43,6 +56,7 @@ void usercontrol() {
 int main() {
   Competition.autonomous(autonomous);
   Competition.drivercontrol(usercontrol);
+  // FIXME: drivercode isnt being properly called dont know why but i put a question on the vex forums
   pre_auton();
 
   while (true) {
